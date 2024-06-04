@@ -1,8 +1,5 @@
-for linux: ```pip install python-vlc ```
-
-for windows:
-‍‍```pip install python-vlc windows-curses```
-
+install dependencies:
+```python3 install -r requirements.txt```
 run:
 ```python3 radio.py```
 
