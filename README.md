@@ -10,3 +10,5 @@ run:
 - "p" for play/pause
 - UP & DOWN key for change volume
 - "Esc" for exit
+
+![w](https://github.com/seyedmahdi4/radio/blob/main/img.png/?raw=true)
