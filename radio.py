@@ -7,11 +7,11 @@ import requests
 
 
 name_ = f"9Craft Radio"
-data = '"p" for play/pause UP & DOWN key for change volume and "Esc" for exit'
+data = 'space or "P" for play/pause UP & DOWN key for change volume and "Esc" for exit'
 status = "Wait for select channel ..."
 title = ""
 vol = ""
-keys = list("1234567890qwertyui")
+keys = list("1234567890qwertyuiop")
 is_playing = False
 playing_now = -1
 
@@ -29,15 +29,16 @@ def init_curses():
     stdscr = curses.initscr()
     curses.start_color()
     curses.init_pair(1, 44, curses.COLOR_BLACK)
-    curses.init_pair(2, 223, curses.COLOR_BLACK)
-    curses.init_pair(3, 227, curses.COLOR_BLACK)
+    curses.init_pair(2, 181, curses.COLOR_BLACK)
+    curses.init_pair(3, 223, curses.COLOR_BLACK)
     curses.init_pair(4, 47, curses.COLOR_BLACK)
     curses.init_pair(5, 45, curses.COLOR_BLACK)
     curses.init_pair(6, 206, curses.COLOR_BLACK)
     curses.init_pair(7, 195, curses.COLOR_BLACK)
     curses.init_pair(8, 242, curses.COLOR_BLACK)
-    curses.init_pair(9, 221, curses.COLOR_BLACK)
-    curses.init_pair(10, 226, curses.COLOR_BLACK)
+    curses.init_pair(9, 171, curses.COLOR_BLACK)
+    curses.init_pair(10, 111, curses.COLOR_BLACK)
+
     curses.noecho()
     curses.cbreak()
     stdscr.keypad(True)
@@ -72,10 +73,13 @@ def update_display(stdscr):
     for i, url in enumerate(urls, start=0):
         name__ = url["server_name"]
         title = url["title"]
-        stdscr.addstr(f"{keys[i]}. ", curses.color_pair(1))
-        stdscr.addstr(f"{name__}: ", curses.color_pair(5))
+        if i == playing_now:
+            stdscr.addstr(f"{keys[i]}. ", curses.color_pair(4))
+            stdscr.addstr(f"{name__}: ", curses.color_pair(4))
+        else:
+            stdscr.addstr(f"{keys[i]}. ", curses.color_pair(1))
+            stdscr.addstr(f"{name__}: ", curses.color_pair(5))
         stdscr.addstr(f"{title}\n", curses.color_pair(7))
-
     stdscr.addstr(f'\n{data}\n', curses.color_pair(8) | curses.A_ITALIC)
 
     if vol:
@@ -95,19 +99,19 @@ def main(stdscr):
             break
         elif key == curses.KEY_UP:
             vol_ = player.audio_get_volume()
-            new_vol = min(vol_ + 10, 100)
+            new_vol = min(vol_ + 5, 100)
             player.audio_set_volume(new_vol)
             if player.audio_get_volume() != 100:
-                vol = f"{player.audio_get_volume() + 10}"
+                vol = f"{player.audio_get_volume() + 5}"
 
         elif key == curses.KEY_DOWN:
             vol_ = player.audio_get_volume()
-            new_vol = max(vol_ - 10, 0)
+            new_vol = max(vol_ - 5, 0)
             player.audio_set_volume(new_vol)
             if player.audio_get_volume() != 0:
-                vol = f"{player.audio_get_volume() - 10}"
+                vol = f"{player.audio_get_volume() - 5}"
 
-        elif key == ord("p") and playing_now != -1:
+        elif (key == ord("p") or key == ord("P") or key == ord(" ")) and playing_now != -1:
             if is_playing:
                 player.stop()
                 status = "Pused"
@@ -126,7 +130,7 @@ def main(stdscr):
                 player.play()
                 playing_now = ind
                 is_playing = True
-            status = "Playing.."
+            status = "Playing..."
         update_display(stdscr)
 
 
