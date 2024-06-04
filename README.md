@@ -11,4 +11,4 @@ run:
 - UP & DOWN key for change volume
 - "Esc" for exit
 
-![w](https://github.com/seyedmahdi4/radio/blob/main/img.png/?raw=true)
+![w](https://github.com/seyedmahdi4/radio/blob/main/img2.png/?raw=true)
