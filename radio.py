@@ -114,7 +114,7 @@ def main(stdscr):
         elif (key == ord("p") or key == ord("P") or key == ord(" ")) and playing_now != -1:
             if is_playing:
                 player.stop()
-                status = "Pused"
+                status = "Paused"
                 is_playing = False
             else:
                 player.play()
