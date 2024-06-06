@@ -1,5 +1,5 @@
 install dependencies:\
-```python3 install -r requirements.txt```\
+```pip install -r requirements.txt```\
 run:\
 ```python3 radio.py```\
 If you have a problem with the installation of a dependency, run the following command (in Debian):\
