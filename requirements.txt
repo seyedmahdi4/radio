@@ -1,2 +1,4 @@
 python-vlc
 windows-curses; sys_platform == 'win32'
+
+requests~=2.32.3
