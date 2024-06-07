@@ -162,6 +162,9 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         sys.exit()
     except Exception as e:
-        end_curses(stdscr)
         print("ERROR:", e)
+        try:
+            end_curses(stdscr)
+        except:
+            pass
         sys.exit(1)
