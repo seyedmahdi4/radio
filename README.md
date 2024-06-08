@@ -21,3 +21,7 @@ or make venv:\
 
 If your colors are not the same as the image, export this variable\
 ```export TERM=xterm-256color```
+
+### VLC 
+On Windows you can just install [VLC](https://www.videolan.org/vlc/download-windows.html) to add vlc libraries, or manually
+add the vlc libraries and dlls and define paths.
