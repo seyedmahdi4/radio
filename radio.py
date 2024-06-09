@@ -24,7 +24,9 @@ def load_data():
     """Fetches the radio channel data from the API."""
     global urls
     response = session.get("https://radio.9craft.ir/v1/api/genre/all").json()
-    urls = response["data"]
+    if response["data"]:
+        urls = response["data"]
+
 
 
 def init_curses():
